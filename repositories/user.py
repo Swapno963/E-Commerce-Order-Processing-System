@@ -1,4 +1,5 @@
-from main import User
+from interfaces.user import AuthService
+from entities.user import User
 
 class UserRepository:
     def __init__(self):
@@ -31,7 +32,7 @@ class UserRepository:
         return None
 
 
-class AuthService:
+class AuthService(AuthService):
     def __init__(self, user_repo):
         self.user_repo = user_repo
 
@@ -44,20 +45,10 @@ class AuthService:
         if user.password != password:
             raise Exception("Invalid password")
 
-        return f"Welcome {user.name}"
+        return f"Welcome {user.name}", 200
 
 
 # =========================
 # USAGE
 # =========================
 
-repo = UserRepository()
-
-auth_service = AuthService(repo)
-
-result = auth_service.login(
-    email="swapno@gmail.com",
-    password="1234"
-)
-
-print(result)
