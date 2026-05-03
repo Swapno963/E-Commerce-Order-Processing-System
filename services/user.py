@@ -14,4 +14,4 @@ class AuthService(AuthService):
         if user.password != password:
             raise Exception("Invalid password")
 
-        return f"Welcome {user.name}", 200
+        return user.id, f"Welcome {user.name}", 200
