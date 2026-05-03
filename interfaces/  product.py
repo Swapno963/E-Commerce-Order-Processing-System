@@ -1,7 +1,7 @@
 from abc import ABC, abstractmethod
 
 
-class ProductService(ABC):
+class ProductServiceInterface(ABC):
 
     @abstractmethod
     def addProduct(self, name: str, price: int, stock: int):
