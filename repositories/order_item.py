@@ -1,4 +1,3 @@
-from main import OrderItem
 
 class OrderItemRepository:
     def __init__(self):

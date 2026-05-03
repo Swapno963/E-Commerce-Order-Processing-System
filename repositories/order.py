@@ -1,4 +1,4 @@
-from main import Order
+from entities.order import Order
 
 class OrderRepository:
     def __init__(self):

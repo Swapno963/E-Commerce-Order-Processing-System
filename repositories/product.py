@@ -1,4 +1,6 @@
-from main import Product
+from interfaces.product import ProductService
+from entities.product import Product
+
 
 class ProductRepository:
     def __init__(self):
@@ -17,3 +19,6 @@ class ProductRepository:
         product = self.storage.get(product_id)
         if product:
             product.stock -= quantity
+
+    def get_all(self):
+        return self.storage
