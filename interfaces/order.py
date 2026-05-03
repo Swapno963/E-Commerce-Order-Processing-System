@@ -22,3 +22,10 @@ class OrderServiceInterface(ABC):
     @abstractmethod
     def delete_order(self, order_id):
         pass
+
+
+class DiscountStrategy(ABC):
+
+    @abstractmethod
+    def apply_discount(self, price):
+        pass
