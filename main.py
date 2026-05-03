@@ -1,10 +1,15 @@
-from repositories.user import UserRepository, AuthService
+from repositories.user import UserRepository
+from repositories.product import ProductRepository
+from services.user import AuthService
+from services.product import ProductService
 
 user_id = 0
 is_logged_in = False
-repo = UserRepository()
+auth_repo = UserRepository()
+product_repo = ProductRepository()
 
-auth_service = AuthService(repo)
+auth_service = AuthService(auth_repo)
+product_service = ProductService(product_repo)
 
 
 while True:
@@ -22,11 +27,9 @@ while True:
         print("c. Demo login")
         print("d. Exit")
 
-
     choice = input("Enter choice: ")
 
-
-    if choice =="1":
+    if choice == "1":
         print("One chosen")
     elif choice == "d":
         print("Exiting...")
@@ -34,13 +37,10 @@ while True:
     if choice == "a":
         email = input("Enter Email: ")
         password = input("Enter Password: ")
-        message, status = auth_service.login(
-            email=email,
-            password=password
-        )
+        message, status = auth_service.login(email=email, password=password)
 
         # email="swapno@gmail.com",
-            # password="1234"
+        # password="1234"
         if status == 200:
             is_logged_in = True
             print(message)
@@ -48,10 +48,7 @@ while True:
             print("Login failed!")
 
     if choice == "c":
-        message, status = auth_service.login(
-            email="swapno@gmail.com",
-            password="1234"
-        )
+        message, status = auth_service.login(email="swapno@gmail.com", password="1234")
         if status == 200:
             is_logged_in = True
             print(message)
