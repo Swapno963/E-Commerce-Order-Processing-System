@@ -1,7 +1,11 @@
 from repositories.user import UserRepository
 from repositories.product import ProductRepository
+from repositories.order_item import OrderItemRepository
+from repositories.order import OrderRepository
 from services.user import AuthService
 from services.product import ProductService
+from services.orderItem import OrderItemService
+from services.order import OrderService
 
 user_id = 0
 is_logged_in = False

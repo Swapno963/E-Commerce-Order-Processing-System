@@ -1,4 +1,3 @@
-from interfaces.product import ProductService
 from entities.product import Product
 
 
