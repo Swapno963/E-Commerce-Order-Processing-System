@@ -18,20 +18,26 @@ while True:
         print("1. View Products")
         print("2. Create Order")
         print("3. View Orders")
-        print("4. Exit")
+        print("e. Exit")
 
     else:
         print("\n\n\n===== MENU =====")
         print("a. Login")
         print("b. Registration")
         print("c. Demo login")
-        print("d. Exit")
+        print("e. Exit")
 
     choice = input("Enter choice: ")
 
     if choice == "1":
-        print("One chosen")
-    elif choice == "d":
+        products = product_service.viewAllProducts()
+        print("products : ", products)
+
+    elif choice == "2":
+        product_id = input("Enter Product id: ")
+        quantity = input("Enter how many you want: ")
+
+    elif choice == "e":
         print("Exiting...")
         break
     if choice == "a":
