@@ -1,42 +1,44 @@
-from entities import Order, OrderItem
+from interfaces.order import OrderServiceInterface
+from entities.order import Order
 
-class OrderService:
-    def __init__(self, product_repo, order_repo, order_item_repo):
-        self.product_repo = product_repo
+
+class OrderService(OrderServiceInterface):
+
+    def __init__(self, order_repo):
         self.order_repo = order_repo
-        self.order_item_repo = order_item_repo
 
-    def place_order(self, order_id, user_id, product_id, quantity):
+    def create_order(self, id, order_item, user_id):
 
-        # 1. Fetch product
-        product = self.product_repo.get_by_id(product_id)
+        if user_id <= 0:
+            raise Exception("Invalid user_id")
 
-        if not product:
-            raise Exception("Product not found")
+        if order_item <= 0:
+            raise Exception("Invalid order_item")
 
-        # 2. Stock validation (business rule)
-        if product.stock < quantity:
-            raise Exception("Insufficient stock")
-
-        # 3. Create OrderItem
-        order_item = OrderItem(
-            id=order_id,
-            product_id=product_id,
-            quantity=quantity
-        )
-
-        self.order_item_repo.save(order_item)
-
-        # 4. Create Order
-        order = Order(
-            id=order_id,
-            order_item_id=order_item.id,
-            user_id=user_id
-        )
+        order = Order(id=id, order_item=order_item, user_id=user_id)
 
         self.order_repo.save(order)
 
-        # 5. Update stock
-        self.product_repo.reduce_stock(product_id, quantity)
+        return order
+
+    def get_order(self, order_id):
+        order = self.order_repo.get_by_id(order_id)
+
+        if not order:
+            raise Exception("Order not found")
 
         return order
+
+    def get_all_orders(self):
+        return self.order_repo.get_all()
+
+    def get_orders_by_user(self, user_id):
+        return self.order_repo.get_by_user_id(user_id)
+
+    def delete_order(self, order_id):
+        deleted = self.order_repo.delete(order_id)
+
+        if not deleted:
+            raise Exception("Order not found")
+
+        return "Order deleted successfully"
