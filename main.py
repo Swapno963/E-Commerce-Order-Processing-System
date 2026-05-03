@@ -43,9 +43,9 @@ while True:
         product_id = input("Enter Product id: ")
         quantity = input("Enter how many you want: ")
         new_item = order_item_service.create_order_item(
-            id=3, product_id=product_id, quantity=new_item
+            id=3, product_id=product_id, quantity=quantity
         )
-        new_order = order_service.create_order(id=3, order_item=1, user_id=1)
+        new_order = order_service.create_order(id=3, order_item=3, user_id=1)
         print("Created Order:", new_order)
 
     elif choice == "3":
@@ -54,7 +54,7 @@ while True:
     elif choice == "e":
         print("Exiting...")
         break
-    if choice == "a":
+    elif choice == "a":
         email = input("Enter Email: ")
         password = input("Enter Password: ")
         message, status = auth_service.login(email=email, password=password)
@@ -67,7 +67,7 @@ while True:
         else:
             print("Login failed!")
 
-    if choice == "c":
+    elif choice == "c":
         message, status = auth_service.login(email="swapno@gmail.com", password="1234")
         if status == 200:
             is_logged_in = True

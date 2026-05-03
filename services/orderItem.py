@@ -9,7 +9,7 @@ class OrderItemService(OrderItemServiceInterface):
 
     def create_order_item(self, id, product_id, quantity):
 
-        if quantity <= 0:
+        if int(quantity) <= 0:
             raise Exception("Quantity must be greater than 0")
 
         order_item = OrderItem(id=id, product_id=product_id, quantity=quantity)
