@@ -1,4 +1,4 @@
-from main import Order, OrderItem
+from entities import Order, OrderItem
 
 class OrderService:
     def __init__(self, product_repo, order_repo, order_item_repo):
