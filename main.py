@@ -7,10 +7,13 @@ user_id = 0
 is_logged_in = False
 auth_repo = UserRepository()
 product_repo = ProductRepository()
+order_item_repo = OrderItemRepository()
+order_repo = OrderRepository()
 
 auth_service = AuthService(auth_repo)
 product_service = ProductService(product_repo)
-
+order_item_service = OrderItemService(order_item_repo)
+order_service = OrderService(order_repo)
 
 while True:
     if is_logged_in:
@@ -28,7 +31,6 @@ while True:
         print("e. Exit")
 
     choice = input("Enter choice: ")
-
     if choice == "1":
         products = product_service.viewAllProducts()
         print("products : ", products)
@@ -36,7 +38,15 @@ while True:
     elif choice == "2":
         product_id = input("Enter Product id: ")
         quantity = input("Enter how many you want: ")
+        new_item = order_item_service.create_order_item(
+            id=3, product_id=product_id, quantity=new_item
+        )
+        new_order = order_service.create_order(id=3, order_item=1, user_id=1)
+        print("Created Order:", new_order)
 
+    elif choice == "3":
+        orders = order_service.get_all_orders()
+        print("Orders", orders)
     elif choice == "e":
         print("Exiting...")
         break
